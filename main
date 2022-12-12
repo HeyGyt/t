@@ -1,0 +1,315 @@
+local chatEvents = game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents")
+local messageDoneFiltering = chatEvents:WaitForChild("OnMessageDoneFiltering")
+local HTTP = game:FindService("HttpService")
+local bots = {
+    game.Players.LocalPlayer.Name
+}
+local allowedusers = {
+    "jekaom",
+    "Bloxwood1222",
+    "yooklez",
+    "OneSpiderBoisFriend",
+    "llxAlexHehexll",
+    "drx_c0",
+    "extremesodaa",
+    "fatejxx",
+    "LetsRobABankTogether",
+    "rusticwasteman2",
+    "Mr_BlueCandy"
+}
+
+local function GetPlayer(String)
+    local LoweredPlayerName = string.lower(String)
+    for _, Player in next, game.Players:GetChildren() do
+        if (Player.Name:sub(1, #String):lower() == LoweredPlayerName or Player.DisplayName:sub(1, #String):lower() == LoweredPlayerName) and not table.find(bots, Player.Name) then
+            return Player
+        end
+    end
+end
+
+messageDoneFiltering.OnClientEvent:Connect(function(message)
+        local player = game.Players:FindFirstChild(message.FromSpeaker)
+        local message = message.Message or ""
+        if player and (table.find(allowedusers, player.Name) or table.find(allowed, player.Name)) then
+            if tostring(message) == ".print" then
+print("hi")
+            elseif tostring(message) == ".shutdown" then
+                game.Players.LocalPlayer:Kick("you have been kicked by a chad in simplity")
+            elseif tostring(message) == ".rejoin" then
+                local tpservice= game:GetService("TeleportService")
+                local plr = game.Players.LocalPlayer
+                tpservice:Teleport(game.PlaceId, plr)
+            elseif string.find(tostring(message), '.bring') then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = player.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 0)
+            elseif string.find(tostring(message), '.own') then
+                local PlayerString = message:gsub('.own ', '')
+                local Player = GetPlayer(tostring(PlayerString))
+                _G.Enabled = true
+                while _G.Enabled == true do
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Player.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1)
+                        local Anim2 = Instance.new("Animation")
+                        Anim2.AnimationId = "rbxassetid://148840371"
+                        local track2 = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(Anim2)
+                        track2:Play(.1, 1, 1)
+                    task.wait()
+                end
+            elseif string.find(tostring(message), '.say') then
+                local String = message:gsub('.say ', '')
+game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(String, 'All')
+ elseif string.find(tostring(message), '.spam') then
+            local String = message:gsub('.spam ', '')
+                            _G.Enabled = true
+                while _G.Enabled == true do
+game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(String, 'All')
+                   task.wait(1.69)
+                end
+            elseif tostring(message) == ".advert" then
+                game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("#simplityontop", "All")
+            elseif tostring(message) == ".ragdoll" then
+                game.Players.LocalPlayer.Character.HumanoidRootPart:Destroy()
+            elseif tostring(message) == ".punish" then
+                game.Players.LocalPlayer:remove()
+            elseif tostring(message) == ".explode" then
+                local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+
+                local explosion = Instance.new("Explosion")
+                 explosion.Parent = game.Workspace
+                 explosion.Position = plr.Position
+            elseif tostring(message) == ".cmds" then
+                game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("simple's alt control has many features: .train <plr>, .say <msg>, .cube <plr>, .cover <plr>, .cmds, .spam <msg>, .advert, .own <plr>, .seizure, .screamer", "All")
+                wait(1)
+                game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(".leftwing <plr>, .wings <plr>, .freeze, .unfreeze, .stop, .helicopter, .spin <speed>, .dance, .dance2, .dance3, .laugh, .cheer, .point, .follow <plr>", "All")
+                wait(1)
+                game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(".wave, .swarm <plr>, .jump, .sit, .savefps, .respawn, .shutdown, .lineup <plr>, .ws <amount>, .jp <amount, .grav <amount>, .fling <plr, .moonwalk", "All")
+            elseif tostring(message) == ".respawn" then
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/HeyGyt/respawn/main/main"))()
+             elseif string.find(tostring(message), '.join') then
+                local t = message:split(" ")
+                local gameID = tonumber(t[2])
+                local tpservice= game:GetService("TeleportService")
+                local plr = game.Players.LocalPlayer
+                tpservice:Teleport(gameID, plr)
+            elseif tostring(message) == ".freeze" then
+                game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Anchored = true
+            elseif tostring(message) == ".unfreeze" then
+                game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Anchored = false
+            elseif string.find(tostring(message), '.cube') then
+                local PlayerString = message:gsub('.cube ', '')
+                local Player = GetPlayer(tostring(PlayerString))
+                _G.Enabled = true
+                while _G.Enabled == true do
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                            Player.Character.HumanoidRootPart.CFrame * CFrame.new(6, 0, 6)
+                    task.wait()
+                end
+            elseif string.find(tostring(message), '.wings') then
+                local PlayerString = message:gsub('.wings ', '')
+                local Player = GetPlayer(tostring(PlayerString))
+                _G.Enabled = true
+                while _G.Enabled == true do
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0,0,0)
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                            Player.Character.HumanoidRootPart.CFrame * CFrame.new(2, 2, 2)
+task.wait()
+end
+            elseif string.find(tostring(message), '.leftwing') then
+                local PlayerString = message:gsub('.leftwing ', '')
+                local Player = GetPlayer(tostring(PlayerString))
+                _G.Enabled = true
+                while _G.Enabled == true do
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                            Player.Character.HumanoidRootPart.CFrame * CFrame.new(-2, 0, 2)
+task.wait()
+                       end
+            elseif string.find(tostring(message), '.lineup') then
+                local PlayerString = message:gsub('.lineup ', '')
+                local Player = GetPlayer(tostring(PlayerString))
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                        Player.Character.HumanoidRootPart.CFrame * CFrame.new(4, 0, 0)
+    elseif string.find(tostring(message), '.ws') then   
+    local t = message:split(" ")
+    local WalkSpeed = tonumber(t[2])
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = WalkSpeed
+    elseif string.find(tostring(message), '.jp') then
+    local t = message:split(" ")
+    local JumpPower = tonumber(t[2])
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = JumpPower
+    elseif string.find(tostring(message), '.grav') then
+    local t = message:split(" ")
+    local Gravity = tonumber(t[2])
+    game.workspace.Gravity = Gravity
+            elseif string.find(tostring(message), '.cover') then
+                local PlayerString = message:gsub('.cover ', '')
+                local Player = GetPlayer(tostring(PlayerString))
+                _G.Enabled = true
+                while _G.Enabled == true do
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                            Player.Character.HumanoidRootPart.CFrame * CFrame.new(9, 0, 0)
+                    task.wait()
+                end
+            elseif string.find(tostring(message), '.train') then
+                local PlayerString = message:gsub('.train ', '')
+                local Player = GetPlayer(tostring(PlayerString))
+                _G.Enabled = true
+                while _G.Enabled == true do
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                            Player.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 2)
+                    task.wait()
+                end
+            elseif tostring(message) == ".spin" then
+             local Players = game:GetService("Players")
+             local t = message:split(" ")
+             local SpinSpeed = t[2]
+                _G.Enabled = true
+                while _G.Enabled == true do
+                    local Client = game:GetService("Players").LocalPlayer
+                    Client.Character.HumanoidRootPart.CFrame = Client.Character.HumanoidRootPart.CFrame * CFrame.Angles(0, math.rad(150), 0)
+                    task.wait()
+                end
+
+            elseif string.find(tostring(message), '.fling') then
+                local PlayerString = message:gsub('.fling ', '')
+                local Player = GetPlayer(tostring(PlayerString))
+                local Target = Player
+for _, child in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+        if child:IsA("BasePart") then
+            child.CustomPhysicalProperties = PhysicalProperties.new(math.huge, 0.3, 0.5)
+        end
+    end
+    local bambam = Instance.new("BodyAngularVelocity")
+    bambam.Name = "hot"
+    bambam.Parent = game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart')
+    bambam.AngularVelocity = Vector3.new(0,99999,0)
+    bambam.MaxTorque = Vector3.new(0,math.huge,0)
+    bambam.P = math.huge
+    local Char = game.Players.LocalPlayer.Character:GetChildren()
+    for i, v in next, Char do
+        if v:IsA("BasePart") then
+            v.CanCollide = false
+            v.Massless = true
+            v.Velocity = Vector3.new(0, 0, 0)
+        end
+    end
+    
+                    _G.Enabled = true
+                while _G.Enabled == true do
+                   game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Target.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 0)
+                         task.wait()
+                end
+            elseif tostring(message) == ".helicopter" then
+                _G.Enabled = true
+                while _G.Enabled == true do
+                    local Character = game.Players.LocalPlayer.Character
+                    Character.HumanoidRootPart.CFrame =
+                        Character.HumanoidRootPart.CFrame * CFrame.Angles(0, 0, math.rad(100))
+                    task.wait()
+                end
+            elseif tostring(message) == ".seizure" then
+                _G.Enabled = true
+                while _G.Enabled == true do
+                    local Character = game.Players.LocalPlayer.Character
+                    Character.HumanoidRootPart.CFrame =
+                        Character.HumanoidRootPart.CFrame * CFrame.Angles(0, math.rad(100), 0)
+                    Character.HumanoidRootPart.CFrame =
+                        Character.HumanoidRootPart.CFrame * CFrame.Angles(0, 0, math.rad(100))
+                    task.wait()
+                end
+            elseif string.find(tostring(message), '.swarm') then
+                local PlayerString = message:gsub('.swarm ', '')
+                local Player = GetPlayer(tostring(PlayerString))
+                local plr = game.Players.LocalPlayer
+                local p = Player
+                                _G.Enabled = true
+                while _G.Enabled == true do
+                plr.Character.Humanoid:MoveTo(Vector3.new(p.Character.HumanoidRootPart.Position.X + math.random(-5.8,5.4),p.Character.HumanoidRootPart.Position.Y + 0,p.Character.HumanoidRootPart.Position.Z +math.random(-4,4.8)))
+    task.wait(0.2)
+    end
+            elseif string.find(tostring(message), '.follow') then
+                local PlayerString = message:gsub('.follow ', '')
+                local Player = GetPlayer(tostring(PlayerString))
+                _G.Enabled = true
+                while _G.Enabled == true do
+                game:GetService("Players").LocalPlayer.Character.Humanoid:MoveTo(Player.Character.HumanoidRootPart.Position)
+                    task.wait()
+                end
+            elseif tostring(message) == ".savefps" then
+                repeat
+                    wait()
+                until game:IsLoaded()
+                game:GetService("Players").LocalPlayer.Idled:connect(
+                    function()
+                        game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+                    end)
+                setfpscap(15)
+                game:GetService("RunService"):Set3dRenderingEnabled(false)
+                local vu = game:GetService("VirtualUser")
+                game:GetService("Players").LocalPlayer.Idled:connect(
+                    function()
+                        vu:Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+                        wait(1)
+                        vu:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+                    end)
+            elseif tostring(message) == ".screamer" then
+UserSettings():GetService("UserGameSettings").MasterVolume = 10
+               _G.Enabled = true
+while _G.Enabled == true do
+for i,v in pairs(game.Players:GetPlayers()) do
+       if v.Name ~= me and not v.PlayerGui:FindFirstChild("Screamer") and v:FindFirstChild("PlayerGui") then
+               spawn(function()
+                       local color = Instance.new("ColorCorrectionEffect") 
+                       color.Parent = game.Lighting
+                       local newgui = Instance.new("ScreenGui",v.PlayerGui)
+                       newgui.Name = "Screamer"
+                       local newimage = Instance.new("ImageLabel",newgui)
+                       newimage.Image = "rbxassetid://1744067162"
+                       newimage.Size = UDim2.new(1,0,1,0)
+                       game:GetService("Lighting").Ambient = Color3.fromRGB(30000978, 0, 0)
+                       color.TintColor = Color3.fromRGB(1, 0, 0)
+                       color.Contrast = 10000
+                       color.Saturation = 0.1
+                       local s = Instance.new("Sound",newgui)
+                       s.SoundId = "rbxassetid://5521683287"
+                       s.Volume = 10000
+                       s.Looped = true
+                       s:Play()
+                       while _G.Enabled == true do
+                               newimage.ImageColor3 = Color3.new(math.random(1,255)/255,math.random(1,255)/255,math.random(1,255)/255)
+                               wait()
+                               newimage.ImageColor3 = Color3.new(1,1,1)
+                       end
+               end)
+       end
+end
+end
+            elseif tostring(message) == ".dance" then
+               game.Players:Chat("/e dance3")
+            elseif tostring(message) == ".dance2" then
+               game.Players:Chat("/e dance2")
+            elseif tostring(message) == ".dance3" then
+               game.Players:Chat("/e dance1")
+            elseif tostring(message) == ".wave" then
+               game.Players:Chat("/e wave")
+            elseif tostring(message) == ".cheer" then
+               game.Players:Chat("/e cheer")
+            elseif tostring(message) == ".point" then
+               game.Players:Chat("/e point")
+            elseif tostring(message) == ".moonwalk" then
+               AnimationId = "429703734"
+                 local Anim = Instance.new("Animation")
+                 Anim.AnimationId = "rbxassetid://"..AnimationId
+                 local k = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
+                 k:Play()
+                 k:AdjustSpeed(1)
+            elseif string.find(tostring(message), '.debug') then
+                print("e")
+            elseif tostring(message) == ".laugh" then
+               game.Players:Chat("/e laugh")
+            elseif tostring(message) == ".stop" then
+                _G.Enabled = false
+            elseif tostring(message) == ".sit" then
+                game.Players.LocalPlayer.Character.Humanoid.Sit = true
+            elseif tostring(message) == ".jump" then
+                game.Players.LocalPlayer.Character.Humanoid.Jump = true
+            end
+        end
+end)
